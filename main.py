@@ -61,8 +61,8 @@ async def main():
         send_duty,
         trigger="cron",
         day_of_week="mon-fri",
-        hour=8,
-        minute=20
+        hour=17,
+        minute=23
     )
 
     scheduler.start()

@@ -1,6 +1,7 @@
 import asyncio
 from aiogram import Bot, Dispatcher
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
+import os
 
 TOKEN = "8354172231:AAEq2OuXq45Klg3ekYa1CNS8spqYRhbwGac"
 CHAT_ID = -1001234567890  # id класної бесіди
@@ -32,7 +33,14 @@ students = [
     "Яцура Матвій"
 ]
 
-index = 0  # початок циклу
+INDEX_FILE = "index.txt"
+
+# Читаємо останній індекс або ставимо 0
+if os.path.exists(INDEX_FILE):
+    with open(INDEX_FILE, "r") as f:
+        index = int(f.read())
+else:
+    index = 0
 
 
 async def send_duty(bot: Bot):
@@ -47,6 +55,10 @@ async def send_duty(bot: Bot):
     text = f"Чергові: {duty[0]}, {duty[1]}"
     await bot.send_message(CHAT_ID, text)
 
+    # Зберігаємо індекс у файл
+    with open(INDEX_FILE, "w") as f:
+        f.write(str(index))
+
 
 async def main():
     bot = Bot(token=TOKEN)
@@ -59,7 +71,7 @@ async def main():
         day_of_week="mon-fri",
         hour=8,
         minute=20,
-        args=[bot]                 # <<<<<< ОБОВʼЯЗКОВО передаємо bot
+        args=[bot]
     )
     scheduler.start()
 
@@ -67,4 +79,4 @@ async def main():
 
 
 if __name__ == "__main__":
-    asyn
+    asyncio.run(main())

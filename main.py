@@ -4,7 +4,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 import os
 
 TOKEN = "8354172231:AAEq2OuXq45Klg3ekYa1CNS8spqYRhbwGac"
-CHAT_ID = -1001234567890  # id класної бесіди
+CHAT_ID = -4998505111  # id класної бесіди
 
 students = [
     "Андрусик Ангеліна",
